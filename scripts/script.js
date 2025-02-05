@@ -18,20 +18,31 @@ let offsetX = contenedor.offsetWidth / 2, offsetY = contenedor.offsetHeight / 2;
 let isDragging = false;
 
 function startDrag(e) {
+    e.preventDefault(); // Evitar selección de texto al arrastrar
+
     isDragging = true;
-    startX = (e.touches ? e.touches[0].clientX : e.clientX) - offsetX;
-    startY = (e.touches ? e.touches[0].clientY : e.clientY) - offsetY;
+    // Detectar si es un toque o un mouse
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    startX = clientX - offsetX;
+    startY = clientY - offsetY;
 }
 
 function moveDrag(e) {
     if (!isDragging) return;
     
-    offsetX = (e.touches ? e.touches[0].clientX : e.clientX) - startX;
-    offsetY = (e.touches ? e.touches[0].clientY : e.clientY) - startY;
+    // Detectar si es un toque o un mouse
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    offsetX = clientX - startX;
+    offsetY = clientY - startY;
 
     // Limitar el movimiento dentro del contenedor (en X y Y)
     const maxX = contenedor.clientWidth - objeto.clientWidth;
     const maxY = contenedor.clientHeight - objeto.clientHeight;
+
     offsetX = Math.max(0, Math.min(maxX, offsetX));
     offsetY = Math.max(0, Math.min(maxY, offsetY));
 
@@ -44,6 +55,15 @@ function moveDrag(e) {
 
 function endDrag() {
     isDragging = false;
+    const centerX = contenedor.clientWidth / 2;
+    // Obtener la posición actual de objeto
+    const objetoX = offsetX + objeto.clientWidth / 2;
+
+    if (objetoX < centerX / 2) {
+        setTimeout(() => {
+            sendWhatsapp();
+        }, 50);
+    }
 }
 
 function updateTextBasedOnPosition() {
@@ -56,13 +76,12 @@ function updateTextBasedOnPosition() {
         objeto.innerText = '💖';
         setBackground(2);
         setSmile(2);
-        sendWhatsapp();
     } else if (objetoX > centerX * 1.5) {
         objeto.innerText = '💔';
         setBackground(1);
         setSmile(1);
     } else {
-        objeto.innerHTML = '<div class="heart"></div>';
+        objeto.innerHTML = '🧡​';
         setBackground(3);
         setSmile(3);
     }
@@ -123,5 +142,5 @@ function sendWhatsapp(){
     let url = `https://wa.me/${numero}?text=${mensaje}`;
     setTimeout(() => {
         window.open(url, '_blank');
-    }, 2000);
+    }, 1000);
 }

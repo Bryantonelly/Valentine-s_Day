@@ -34,14 +34,14 @@ h1 {
     color: #ffffff;
     font-size: 3em;
     font-family: serif;
-    line-height: 24px;
+    line-height: 1em;
 }
 h4 {
     color: #ffffff;
     text-shadow: 2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black;
     font-family: serif;
     font-size: 1.5em;
-    line-height: 0px;
+    line-height: .8em;
 }
 
 /* Corazón */
@@ -52,25 +52,6 @@ h4 {
     height: 90px;
     animation: 1.5s ease 0s infinite beat;
 }
-.heart:before,
-.heart:after{
-    position: absolute;
-    content: "";
-    left: 50px;
-    top: 0;
-    width: 50px;
-    height: 80px;
-    background: #fc2e5a;
-    border-radius: 50px 50px 0 0;
-    transform: rotate(-45deg);
-            transform-origin: 0 100%;
-}
-.heart:after{
-    left: 0;
-    transform: rotate(45deg);
-    transform-origin :100% 100%;
-}
-
 
 .cat_box {
     width: 400px;
