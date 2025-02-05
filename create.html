@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>¿Quieres ser mi San Valentín?</title>
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="icon" href="img/cat_img.png" type="image/png">
+    </head>
+    <body>
+        
+        <h1>Sorprende a tu persona especial</h1> 
+        <label for="">Ingrese el nombre de la persona especial:</label>
+        <input type="text" id="nombre" maxlength="12" placeholder="Máximo 12 caracteres">
+        <label for="">Ingrese su número de celular a donde se enviará el mensaje:</label>
+        <input type="text" id="numero" pattern="[0-9]*" inputmode="numeric" maxlength="15" placeholder="Máximo 15 caracteres">
+        <label for="">Ingrese el mensaje:</label>
+        <textarea id="mensaje" name="mensaje" maxlength="100" placeholder="Máximo 100 caracteres"></textarea>
+        <button id="btn_crear_link">Crear link</button>
+        <script src="scripts/script_create.js"></script>
+
+    </body>
+</html>

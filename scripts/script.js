@@ -1,8 +1,25 @@
-// get both pupils
+const objeto = document.getElementById("objeto");
+const contenedor = document.getElementById("contenedor");
+
+const params = new URLSearchParams(window.location.search);
+const nombre = params.get("nombre") || "Nombre";
+const number = params.get("numero") || "51931857235";
+const message = params.get("mensaje") || "Acepto!!";
+console.log("params", params);
+
+console.log("nombre", nombre);
+
+let startX = 0, startY = 0;
+let offsetX = contenedor.offsetWidth / 2, offsetY = contenedor.offsetHeight / 2;
+let isDragging = false;
+
+const title = document.getElementById('title').textContent = `${nombre} ¿Quieres ser mi San Valentín?`;
+
+// logica ojos
 const pupils = document.querySelectorAll(".eye .pupil");
-    window.addEventListener("mousemove", (e) => {
+window.addEventListener("mousemove", (e) => {
         pupils.forEach((pupil) => {
-            // get x and y postion of cursor
+            // obtener x y y de la posicion del cursor
             var rect = pupil.getBoundingClientRect();
             var x = (e.pageX - rect.left) / 30 + "px";
             var y = (e.pageY - rect.top) / 30 + "px";
@@ -10,13 +27,7 @@ const pupils = document.querySelectorAll(".eye .pupil");
         });
 });
 
-const objeto = document.getElementById("objeto");
-const contenedor = document.getElementById("contenedor");
-
-let startX = 0, startY = 0;
-let offsetX = contenedor.offsetWidth / 2, offsetY = contenedor.offsetHeight / 2;
-let isDragging = false;
-
+//función incicio de swipe
 function startDrag(e) {
     e.preventDefault(); // Evitar selección de texto al arrastrar
 
@@ -61,7 +72,7 @@ function endDrag() {
 
     if (objetoX < centerX / 2) {
         setTimeout(() => {
-            sendWhatsapp();
+            sendWhatsapp(number,message);
         }, 50);
     }
 }
@@ -135,10 +146,10 @@ function setBackground(type){
         document.body.classList.add('fondo_normal');
     }
 }
-
-function sendWhatsapp(){
-    let numero = "51931857235";  // Número con el código de país
-    let mensaje = "¡Aceptooo!!!";
+//Abre página en blanco de whatsapp
+function sendWhatsapp(number, message){
+    let numero = number;  // Número con el código de país
+    let mensaje = message;
     let url = `https://wa.me/${numero}?text=${mensaje}`;
     setTimeout(() => {
         window.open(url, '_blank');
